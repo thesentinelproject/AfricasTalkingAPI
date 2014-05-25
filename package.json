@@ -1,0 +1,39 @@
+{
+  "name": "AfricasTalking API Consumer",
+  "description": "Sentinel Project consumer for AfricasTalking Stuff",
+  "version": "1.0.0",
+  "private": false,
+  "author": "Abhishek Bhatnagar <abhishekbh@gmail.com>",
+  "engines": {
+    "node": "0.10.x",
+    "npm":  "1.2.x"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js"
+  },
+  "dependencies": {
+    "express": "3.4.x",
+    "jade": "latest",
+    "mongoose": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-github": "latest",
+    "passport-google-oauth": "latest",
+    "passport-linkedin": "latest",
+    "winston": "latest",
+    "notifier": "latest",
+    "async": "latest",
+    "view-helpers": "latest",
+    "forever": "latest"
+  },
+  "devDependencies": {
+    "supertest": "latest",
+    "should": "latest",
+    "mocha": "latest",
+    "nodemon": "latest"
+  }
+}

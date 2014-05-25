@@ -1,0 +1,30 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  - if (messages.length)
+    - each message in messages
+      .message
+        h3
+          a(href='/messages/'+message._id, title=message.extern_id) #{message.extern_id}
+        p= message.text
+
+        .meta
+          span.muted= formatDate(message.date)
+
+          - if (message.user)
+            | &nbsp; - &nbsp;
+            span RetBy &nbsp;
+
+            - var name = message.user.name ? message.user.name : message.user.username
+
+            a(href="/users/"+message.user._id)= name
+
+    - if (pages > 1)
+      ul.pagination
+        != createPagination(pages, page)
+  - else
+    h4.muted No messages.&nbsp;
+      a(href="/messages/new") create one

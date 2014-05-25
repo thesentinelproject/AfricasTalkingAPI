@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+block main
+  h1= message.title
+
+block content
+  .row
+    .col-md-8
+      p=message.text
+      .meta
+        - if (message.user)
+          - var name = message.user.name ? message.user.name : message.user.username
+          p RetBy :&nbsp;
+            a(href="/users/"+message.user._id)= name
+
+        p.muted= formatDate(message.createdAt, "%b %d, %Y at %I:%M %p")
+
