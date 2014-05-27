@@ -25,7 +25,6 @@
     "passport-google-oauth": "latest",
     "passport-linkedin": "latest",
     "winston": "latest",
-    "notifier": "latest",
     "async": "latest",
     "view-helpers": "latest",
     "forever": "latest"
