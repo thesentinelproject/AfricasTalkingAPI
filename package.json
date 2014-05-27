@@ -19,15 +19,10 @@
     "connect-flash": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "passport-facebook": "latest",
-    "passport-twitter": "latest",
-    "passport-github": "latest",
     "passport-google-oauth": "latest",
-    "passport-linkedin": "latest",
     "winston": "latest",
     "async": "latest",
-    "view-helpers": "latest",
-    "forever": "latest"
+    "view-helpers": "latest"
   },
   "devDependencies": {
     "supertest": "latest",
