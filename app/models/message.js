@@ -18,9 +18,27 @@ var MessageSchema = new Schema({
   to         : {type: Number},
   linkId     : {type: Number},
   date       : {type: Date},
+  tags: {type: [], get: getTags, set: setTags},
   user: {type : Schema.ObjectId, ref : 'User'},
   createdAt  : {type : Date, default : Date.now}
 })
+
+/**
+ * Getters
+ */
+
+var getTags = function (tags) {
+  return tags.join(',')
+}
+
+/**
+ * Setters
+ */
+
+var setTags = function (tags) {
+  return tags.split(',')
+}
+
 
 /**
  * Validations
