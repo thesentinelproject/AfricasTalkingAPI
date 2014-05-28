@@ -57,4 +57,8 @@ module.exports = function (app, passport) {
 
   // home route
   app.get('/', messages.index)
+
+  // tag routes
+  var tags = require('../app/controllers/tags')
+  app.get('/tags/:tag', tags.index)
 }
