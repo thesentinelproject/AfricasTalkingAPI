@@ -22,6 +22,14 @@ block content
 
             a(href="/users/"+message.user._id)= name
 
+          - if (article.tags)
+            | &nbsp; - &nbsp;
+            span Tags &nbsp;
+            - each tag in article.tags.split(',')
+              i.muted.fa.fa-tag &nbsp;
+              a.tag(href="/tags/"+tag)= tag
+              | &nbsp;&nbsp;
+
     - if (pages > 1)
       ul.pagination
         != createPagination(pages, page)

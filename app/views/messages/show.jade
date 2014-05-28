@@ -13,5 +13,12 @@ block content
           p RetBy :&nbsp;
             a(href="/users/"+message.user._id)= name
 
+        - if (article.tags)
+          p Tags &nbsp;
+            - each tag in article.tags.split(',')
+              i.muted.fa.fa-tag &nbsp;
+              a.tag(href="/tags/"+tag)= tag
+              | &nbsp;&nbsp;
+
         p.muted= formatDate(message.createdAt, "%b %d, %Y at %I:%M %p")
 
