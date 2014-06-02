@@ -23,42 +23,26 @@ var messageAuth = [auth.requiresLogin, auth.message.hasAuthorization]
  */
 
 module.exports = function (app, passport) {
+  var generalAuth = passport.authenticate('google', {
+      failureRedirect: '/login',
+      failureFlash: 'Invalid email or password.',
+      scope: 'profile'
+    });
 
   // user routes
   app.get('/login', users.login)
   app.get('/logout', users.logout)
-  app.post('/users', users.create)
-  app.post('/users/session',
-    passport.authenticate('local', {
-      failureRedirect: '/login',
-      failureFlash: 'Invalid email or password.'
-    }), users.session)
-  app.get('/users/:userId', users.show)
-  app.get('/auth/google',
-    passport.authenticate('google', {
-      failureRedirect: '/login',
-      scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-      ]
-    }), users.signin)
-  app.get('/auth/google/callback',
-    passport.authenticate('google', {
-      failureRedirect: '/login'
-    }), users.authCallback)
-
-  app.param('userId', users.user)
 
   // message routes
-  app.param('id', messages.load)
-  app.get('/messages', messages.index)
-  app.get('/messages/:id', messages.show)
-  app.del('/messages/:id', messageAuth, messages.destroy)
+  app.param('id', generalAuth, messages.load)
+  app.get('/messages', generalAuth, messages.index)
+  app.get('/messages/:id', generalAuth, messages.show)
+  app.del('/messages/:id', generalAuth, messages.destroy)
 
   // home route
-  app.get('/', messages.index)
+  app.get('/', generalAuth, messages.index)
 
   // tag routes
   var tags = require('../app/controllers/tags')
-  app.get('/tags/:tag', tags.index)
+  app.get('/tags/:tag', generalAuth, tags.index)
 }
