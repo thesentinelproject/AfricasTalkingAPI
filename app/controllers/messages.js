@@ -68,19 +68,20 @@ exports.index = function(req, res){
       var parsedBody = JSON.parse(body);
       var new_messages = parsedBody['SMSMessageData']['Messages'];
 
-      Object.keys(new_messages).forEach(function(key) {
-        var organic = new_messages[key];
-        // construct and save message
-        new Message({
-          extern_id: organic['id'],
-          text: organic['text'],
-          from: organic['from'],
-          to: organic['to'],
-          linkId: organic['linkId'],
-          date: organic['date']
-        }).save();
-      });
-
+      if (new_messages != null) {
+        Object.keys(new_messages).forEach(function(key) {
+          var organic = new_messages[key];
+          // construct and save message
+          new Message({
+            extern_id: organic['id'],
+            text: organic['text'],
+            from: organic['from'],
+            to: organic['to'],
+            linkId: organic['linkId'],
+            date: organic['date']
+          }).save();
+        });
+      }
     })   
   })
   .on('error',function(e){
