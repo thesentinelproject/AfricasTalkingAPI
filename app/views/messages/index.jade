@@ -4,35 +4,36 @@ block main
   h1= title
 
 block content
-  - if (messages.length)
-    - each message in messages
-      .message
-        h3
-          a(href='/messages/'+message._id, title=message.extern_id) #{message.extern_id}
-        p= message.text
+ table.pure-table.pure-table-bordered
+    thead
+      tr: th Date
+          th Id
+          th Message
+          th From
+          th Tags
+    tbody
+      - if (messages.length)
+        - each message in messages
+          tr
+            td 
+              span.muted= formatDate(message.date)
+            td
+              a(href='/messages/'+message._id, title=message.extern_id) #{message.extern_id}
+            td
+              p= message.text
+            td
+              p= message.from
+            td
+              - if (message.tags)
+                | &nbsp; - &nbsp;
+                span Tags &nbsp;
+                - each tag in message.tags.split(',')
+                  i.muted.fa.fa-tag &nbsp;
+                  a.tag(href="/tags/"+tag)= tag
+                  | &nbsp;&nbsp;
 
-        .meta
-          span.muted= formatDate(message.date)
 
-          - if (message.user)
-            | &nbsp; - &nbsp;
-            span RetBy &nbsp;
+      - if (pages > 1)
+        ul.pagination
+          != createPagination(pages, page)
 
-            - var name = message.user.name ? message.user.name : message.user.username
-
-            a(href="/users/"+message.user._id)= name
-
-          - if (message.tags)
-            | &nbsp; - &nbsp;
-            span Tags &nbsp;
-            - each tag in message.tags.split(',')
-              i.muted.fa.fa-tag &nbsp;
-              a.tag(href="/tags/"+tag)= tag
-              | &nbsp;&nbsp;
-
-    - if (pages > 1)
-      ul.pagination
-        != createPagination(pages, page)
-  - else
-    h4.muted No messages.&nbsp;
-      a(href="/messages/new") create one
