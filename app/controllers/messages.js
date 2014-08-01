@@ -80,9 +80,13 @@ function fetchMessages(lastReceivedId_) {
     
   var request = https.request(options, function(res) {
     res.setEncoding('utf8');
+    var jsObject = '';
     res.on('data', function (chunk) {
-      var jsObject = JSON.parse(chunk);
-      var messages = jsObject.SMSMessageData.Messages;
+      jsObject += chunk;
+    });
+    res.on('end', function () {
+      var parsed = JSON.parse(jsObject);
+      var messages = parsed.SMSMessageData.Messages;
 
       if (messages.length > 0) {
         for (var i = 0; i < messages.length; ++i) {
