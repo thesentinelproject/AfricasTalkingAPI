@@ -87,10 +87,12 @@ function fetchMessages(lastReceivedId_) {
     res.on('end', function () {
       var parsed = JSON.parse(jsObject);
       var messages = parsed.SMSMessageData.Messages;
+      var finalId = '';
 
       if (messages.length > 0) {
         for (var i = 0; i < messages.length; ++i) {
           // construct and save message
+          finalId = messages[i].id;
           new Message({
             extern_id: messages[i].id,
             text: jsesc(messages[i].text),
@@ -101,7 +103,7 @@ function fetchMessages(lastReceivedId_) {
           }).save();
         }
         // recurse baby recurse
-        fetchMessages(lastReceivedId_);
+        fetchMessages(finalId);
       } 
     });
   });
