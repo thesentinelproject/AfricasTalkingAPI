@@ -11,6 +11,7 @@ var mongoose = require('mongoose')
   , config = require('../../config/config')[env]
   , querystring = require('querystring')
   , jsesc = require('jsesc')
+  , jquery = require('jquery')(require("jsdom").jsdom().parentWindow)
   , https = require('https');
 
 /**
@@ -29,6 +30,15 @@ exports.load = function(req, res, next, id){
 }
 
 /**
+ * Ajax 
+ */
+exports.fetch = function(req, res){
+  // here, see if there is more data
+  // if so, then fetchMessages, and reload page when done
+  var data = fetchMessages(req.params['lastId']);
+}
+
+/**
  * List
  */
 
@@ -39,9 +49,7 @@ exports.index = function(req, res){
     perPage: perPage,
     page: page
   }
-  //
-  //////////////////////////////////////////////////////////////////////////////////////
-  // get latest data from API
+
   Message.findOne({}, {}, { sort: {'created_at': -1}}, function(err, message) {
     if (null == message) {
       fetchMessages(0);
@@ -50,9 +58,8 @@ exports.index = function(req, res){
       latest_id = message.extern_id
     };
   });
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Resume normal ops
 
+  var tip = '...loading';
   Message.list(options, function(err, messages) {
     if (err) return res.render('500')
     Message.count().exec(function (err, count) {
@@ -60,10 +67,11 @@ exports.index = function(req, res){
         title: 'Messages',
         messages: messages,
         page: page + 1,
+        lastId: latest_id,
         pages: Math.ceil(count / perPage)
       })
     })
-  })
+  });
 }
 
 function fetchMessages(lastReceivedId_) {
@@ -93,7 +101,7 @@ function fetchMessages(lastReceivedId_) {
         for (var i = 0; i < messages.length; ++i) {
           // construct and save message
           finalId = messages[i].id;
-          new Message({
+          var msg = new Message({
             extern_id: messages[i].id,
             text: jsesc(messages[i].text),
             from: messages[i].from,

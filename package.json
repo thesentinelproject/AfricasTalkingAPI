@@ -23,7 +23,9 @@
     "winston": "latest",
     "async": "latest",
     "view-helpers": "latest",
-    "jsesc": "^0.4.3"
+    "jsesc": "^0.4.3",
+    "jquery": "latest",
+    "jsdom": "~1.0.0-pre.7"
   },
   "devDependencies": {
     "supertest": "latest",
