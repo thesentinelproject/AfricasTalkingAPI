@@ -2,6 +2,7 @@ extends ../layouts/default
 
 block main
   h1= title
+  input(id='lastId',type='hidden',name='lastId',value='#{lastId}')
 
 block content
  table.pure-table.pure-table-bordered

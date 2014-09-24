@@ -25,17 +25,29 @@ exports.load = function(req, res, next, id){
     if (err) return next(err)
     if (!message) return next(new Error('not found'))
     req.message = message
-    next()
+    next();
   })
 }
 
 /**
  * Ajax 
  */
+exports.check = function(req, res){
+  var lastId = req.params['lastId']; 
+  if (checkForNewMessages(lastId)){
+    res.send('true');
+  }else{
+    res.send('false');
+  }
+}
+
 exports.fetch = function(req, res){
-  // here, see if there is more data
-  // if so, then fetchMessages, and reload page when done
-  var data = fetchMessages(req.params['lastId']);
+  var lastId = req.params['lastId']; 
+  fetchMessages(lastId);
+}
+
+function endResponse(res){
+  res.send('Done');
 }
 
 /**
@@ -74,11 +86,21 @@ exports.index = function(req, res){
   });
 }
 
-function fetchMessages(lastReceivedId_) {
+function checkForNewMessages(lastReceivedId){
+  Message.findOne({ extern_id: lastReceivedId },{},function(err, message) {
+    if (null == message) {
+      return false;
+    } else {
+      return true;
+    };
+  });
+}
+
+function fetchMessages(lastReceivedId) {
   var options = {
     host: 'api.africastalking.com',
     port: '443',
-    path: '/version1/messaging?username=' + config.africastalking.username + '&lastReceivedId=' + lastReceivedId_,
+    path: '/version1/messaging?username=' + config.africastalking.username + '&lastReceivedId=' + lastReceivedId,
     method: 'GET',
     headers: {
       'Accept': 'application/json',

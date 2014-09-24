@@ -36,6 +36,7 @@ module.exports = function (app, passport) {
   // message routes
   app.param('id', messages.load)
   app.get('/messages',  messages.index)
+  app.get('/messages/check/:lastId',  messages.check)
   app.get('/messages/fetch/:lastId',  messages.fetch)
   app.get('/messages/:id', messages.show)
   app.del('/messages/:id', messages.destroy)

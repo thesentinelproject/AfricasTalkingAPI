@@ -1,15 +1,30 @@
 $(document).ready(function () {
-  var lastId = $('#last_id').val();
+  var lastId = $('#lastId').val();
 
-  getInitialData(lastId);
-  window.refresh();
+  checkForNewMessages(lastId);
 });
 
-function getInitialData(lastId){
-  // Get initial data
+
+function checkForNewMessages(lastId){
+  var url = 'http://localhost:3000/messages/check/'+lastId;  
+
+  $.get(url,function(data) {
+    if(data){
+      alert('Loading');
+      getData(lastId);
+    }else{
+      alert('No new messages');
+    }
+  });
+}
+
+function getData(lastId){
   var url = 'http://localhost:3000/messages/fetch/'+lastId;  
 
-  $.get(url, function(data) {
-    alert("Load was performed.");
+  $.get(url,function(data) {
+    if(data){
+           
+    }else{
+    }
   });
 }
