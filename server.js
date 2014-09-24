@@ -31,7 +31,7 @@ connect()
 
 // Error handler
 mongoose.connection.on('error', function (err) {
-  console.log(err)
+  console.log(err + '. Are you sure mongodb is running?')
 })
 
 // Reconnect when closed
