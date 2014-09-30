@@ -1,9 +1,12 @@
 $(document).ready(function () {
   var lastId = $('#lastId').val();
 
-  checkForNewMessages(lastId);
+  bindActions();
+  //checkForNewMessages(lastId);
 });
 
+function bindActions(){
+}
 
 function checkForNewMessages(lastId){
   var url = 'http://localhost:3000/messages/check/'+lastId;  

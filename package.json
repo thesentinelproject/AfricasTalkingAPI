@@ -12,20 +12,21 @@
     "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js"
   },
   "dependencies": {
-    "express": "3.4.x",
-    "jade": "latest",
-    "mongoose": "latest",
-    "connect-mongo": "latest",
-    "connect-flash": "latest",
-    "passport": "latest",
-    "passport-local": "latest",
-    "passport-google-oauth": "latest",
-    "winston": "latest",
     "async": "latest",
-    "view-helpers": "latest",
-    "jsesc": "^0.4.3",
+    "connect-flash": "latest",
+    "connect-mongo": "latest",
+    "express": "3.4.x",
+    "formidable": "^1.0.15",
+    "jade": "latest",
     "jquery": "latest",
-    "jsdom": "~1.0.0-pre.7"
+    "jsdom": "~1.0.0-pre.7",
+    "jsesc": "^0.4.3",
+    "mongoose": "latest",
+    "passport": "latest",
+    "passport-google-oauth": "latest",
+    "passport-local": "latest",
+    "view-helpers": "latest",
+    "winston": "latest"
   },
   "devDependencies": {
     "supertest": "latest",

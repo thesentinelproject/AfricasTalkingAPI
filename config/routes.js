@@ -29,6 +29,9 @@ module.exports = function (app, passport) {
       scope: 'profile'
   });
 
+  // posts
+  app.post('/messages/broadcast', messages.broadcast)
+
   // user routes
   app.get('/login', users.login)
   app.get('/logout', users.logout)
@@ -38,6 +41,8 @@ module.exports = function (app, passport) {
   app.get('/messages',  messages.index)
   app.get('/messages/check/:lastId',  messages.check)
   app.get('/messages/fetch/:lastId',  messages.fetch)
+  app.get('/messages/send', messages.send)
+  app.get('/messages/broadcast', messages.broadcast)
   app.get('/messages/:id', messages.show)
   app.del('/messages/:id', messages.destroy)
 

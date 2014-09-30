@@ -27,6 +27,9 @@ module.exports = function (app, config, passport) {
   app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
+  app.use(express.json());
+  app.use(express.urlencoded());
+
   // Logging
   // Use winston on production
   var log
@@ -82,15 +85,16 @@ module.exports = function (app, config, passport) {
     app.use(helpers(pkg.name))
 
     // adds CSRF support
-    if (process.env.NODE_ENV !== 'test') {
+ //   if (process.env.NODE_ENV !== 'test') {
       app.use(express.csrf())
 
       // This could be moved to view-helpers :-)
       app.use(function(req, res, next){
         res.locals.csrf_token = req.csrfToken()
+        res.locals.token = req.csrfToken()
         next()
       })
-    }
+   // }
 
     // routes should be at the last
     app.use(app.router)
