@@ -146,8 +146,8 @@ function fetchMessages(lastReceivedId) {
 function sendMessage(to, message){
   var post_data = querystring.stringify({
     'username' : config.africastalking.username,
-    'to'       : '720993500',
-    'message'  : 'test from abhishek'
+    'to'       : to,
+    'message'  : message 
   });
 
   var post_options = {
@@ -159,7 +159,7 @@ function sendMessage(to, message){
       'Content-Type' : 'application/x-www-form-urlencoded',
       'Content-Length': post_data.length,
       'Accept': 'application/json',
-      'apikey': config.africastalking.apikey
+      'apikey': config.africastalking.apiKey
     }
   };
 
@@ -174,8 +174,8 @@ function sendMessage(to, message){
           logStr     += ';cost='   + recipients[i].cost;
           logStr     += ';messageId='   + recipients[i].messageId;
           logStr     += ';status=' + recipients[i].status;
-          console.log(logStr);
         }
+        console.log(logStr);
       } else {
         console.log('Error while sending: ' + jsObject.SMSMessageData.Message);
       }
