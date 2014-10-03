@@ -1,11 +1,15 @@
 $(document).ready(function () {
   var lastId = $('#lastId').val();
+  var page = $('#page').val();
 
-  bindActions();
-  //checkForNewMessages(lastId);
+  bindActions(page, lastId);
 });
 
-function bindActions(){
+function bindActions(page, lastId){
+  if(page === 'index'){
+    checkForNewMessages(lastId);
+  }else if(page === 'send'){
+  }else{}
 }
 
 function checkForNewMessages(lastId){

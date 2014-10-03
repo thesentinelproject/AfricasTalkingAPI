@@ -3,6 +3,7 @@ extends ../layouts/default
 block main
   h1= title
   input(id='lastId',type='hidden',name='lastId',value='#{lastId}')
+  input(id='page',type='hidden',name='page',value='#{page_action}')
 
 block content
  table.pure-table.pure-table-bordered

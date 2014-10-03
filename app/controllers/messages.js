@@ -80,6 +80,7 @@ exports.index = function(req, res){
     Message.count().exec(function (err, count) {
       res.render('messages/index', {
         title: 'Messages',
+        page_action: 'index',
         messages: messages,
         page: page + 1,
         lastId: latest_id,
@@ -193,6 +194,7 @@ function sendMessage(to, message){
 exports.send = function(req, res){
   res.render('messages/send', {
     title: 'Broadcast Message',
+    page_action: 'send',
     message: req.message
   })
 }
@@ -204,6 +206,7 @@ exports.send = function(req, res){
 exports.show = function(req, res){
   res.render('messages/show', {
     title: req.message.extern_id,
+    page_action: 'show',
     message: req.message
   })
 }
