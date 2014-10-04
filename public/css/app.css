@@ -94,3 +94,7 @@ button.error:focus {
 .navbar-nav > li > a.travis{
   padding-top: 13px;
 }
+
+#page_nav{
+  margin: 1em 0 1em 88%;
+}

@@ -13,12 +13,13 @@ function bindActions(page, lastId){
 }
 
 function checkForNewMessages(lastId){
-  var url = 'http://localhost:3000/messages/check/'+lastId;  
+  var url = '/messages/check/'+lastId;  
+  var fetch = false;
 
   $.get(url,function(data) {
     if(data){
-      alert('Loading');
-      getData(lastId);
+      fetch = confirm("New messages found. Load them?");
+      if (fetch) getData(lastId);
     }else{
       alert('No new messages');
     }
@@ -26,7 +27,7 @@ function checkForNewMessages(lastId){
 }
 
 function getData(lastId){
-  var url = 'http://localhost:3000/messages/fetch/'+lastId;  
+  var url = '/messages/fetch/'+lastId;  
 
   $.get(url,function(data) {
     if(data){

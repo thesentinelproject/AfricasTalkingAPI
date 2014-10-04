@@ -6,6 +6,11 @@ block main
   input(id='page',type='hidden',name='page',value='#{page_action}')
 
 block content
+ - if (pages > 1)
+   form#page_nav(action='/messages',method="get")
+     input(id='page',type='text',name='page',value='#{pages}',size="2")
+     input(type='submit',value='Go To Page')
+
  table.pure-table.pure-table-bordered
     thead
       tr: th Date
@@ -34,5 +39,7 @@ block content
                   a.tag(href="/tags/"+tag)= tag
                   | &nbsp;&nbsp;
 
-
-
+ - if (pages > 1)
+   form#page_nav(action='/messages')
+     input(id='page_number',type='text',name='page_number',value='#{pages}',size="2")
+     input(id='page_number_go',type='submit',name='page_number_go',value='Go To Page')
