@@ -66,10 +66,7 @@ exports.index = function(req, res){
   }
 
   Message.findOne({}, {}, { sort: {'created_at': -1}}, function(err, message) {
-    if (null == message) {
-      fetchMessages(0);
-    } else {
-      fetchMessages(message.extern_id);
+    if (null != message) {
       latest_id = message.extern_id
     };
   });
