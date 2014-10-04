@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+block main
+  h1= title
+  input(id='page',type='hidden',name='page',value='#{page_action}')
+
+block content
+  form(action='/messages/broadcast',method='post')
+    input(type='to',name='to',size=51)
+    br
+    textarea(id='message',name='message',rows=10,cols=50)
+    br
+    br
+    input(type='hidden',name='_csrf',value=csrf_token)
+    input(type='submit',id='sendmessage',value='Send')
