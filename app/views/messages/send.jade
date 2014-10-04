@@ -6,10 +6,17 @@ block main
 
 block content
   form(action='/messages/broadcast',method='post')
-    input(type='to',name='to',size=51)
-    br
-    textarea(id='message',name='message',rows=10,cols=50)
-    br
-    br
-    input(type='hidden',name='_csrf',value=csrf_token)
-    input(type='submit',id='sendmessage',value='Send')
+    table
+      tr
+        td Number (example: 254720993500)
+        td
+          input(type='to',name='to',size=51)
+      tr
+        td Message
+        td
+          textarea(id='message',name='message',rows=10,cols=50)
+      tr
+        td
+          input(type='hidden',name='_csrf',value=csrf_token)
+        td
+          input(type='submit',id='sendmessage',value='Send')

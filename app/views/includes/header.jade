@@ -18,4 +18,8 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
         - else
           li(class=isActive('/login') ? 'active' : '')
             a(href="/login", title="Login") Login
+          li(class=isActive('/messages/') ? 'active' : '')
+            a(href="/messages", title="Inbox") Inbox
+          li(class=isActive('/messages/send') ? 'active' : '')
+            a(href="/messages/send", title="Send") Send
 
