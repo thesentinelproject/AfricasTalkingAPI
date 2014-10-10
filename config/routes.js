@@ -37,19 +37,19 @@ module.exports = function (app, passport) {
   app.get('/logout', users.logout)
 
   // message routes
-  app.param('id', messages.load)
-  app.get('/messages',  messages.index)
-  app.get('/messages/check/:lastId',  messages.check)
-  app.get('/messages/fetch/:lastId',  messages.fetch)
-  app.get('/messages/send', messages.send)
-  app.get('/messages/broadcast', messages.broadcast)
-  app.get('/messages/:id', messages.show)
-  app.del('/messages/:id', messages.destroy)
+  app.param('id', generalAuth, messages.load)
+  app.get('/messages', generalAuth, messages.index)
+  app.get('/messages/check/:lastId', generalAuth, messages.check)
+  app.get('/messages/fetch/:lastId', generalAuth, messages.fetch)
+  app.get('/messages/send', generalAuth, messages.send)
+  app.get('/messages/broadcast', generalAuth, messages.broadcast)
+  app.get('/messages/:id', generalAuth, messages.show)
+  app.del('/messages/:id', generalAuth, messages.destroy)
 
   // home route
-  app.get('/', messages.index)
+  app.get('/', generalAuth, messages.index)
 
   // tag routes
   var tags = require('../app/controllers/tags')
-  app.get('/tags/:tag', tags.index)
+  app.get('/tags/:tag', generalAuth, tags.index)
 }
